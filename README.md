@@ -12,7 +12,7 @@ let wd = DoroWebDAVClient(baseUrl: baseUrl, usr: usr, passwd: passwd)
 let fileData = "Hello, World!".data(using: .utf8)!
 
 //
-// Upload File to WebDAV Server
+// Upload
 //
 await Task {
     let ret = await wd.write("http://192.168.50.55:81/dav/doroTestFile", data: fileData)
@@ -20,7 +20,7 @@ await Task {
 }.value
     
 //
-// Read File from WebDAV Server
+// Read
 //
 await Task {
     let ret = await wd.read("http://192.168.50.55:81/dav/doroTestFile")
@@ -28,7 +28,7 @@ await Task {
 }.value
         
 //
-// List Files in root directory
+// List
 //
 await Task {
     let ret = await wd.list()
@@ -36,7 +36,7 @@ await Task {
 }.value
 
 //
-// Delete File from WebDAV Server
+// Delete
 //
 await Task {
     let ret = await wd.delete("http://192.168.50.55:81/dav/doroTestFile")
