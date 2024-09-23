@@ -14,6 +14,9 @@ let fileData = "Hello, World!".data(using: .utf8)!
 //
 // Upload
 //
+// curl --user 'aaa:aaa' -T t1 http://192.168.50.55:81/dav/t1
+//
+
 await Task {
     let ret = await wd.write("http://192.168.50.55:81/dav/doroTestFile", data: fileData)
     dump(ret)
@@ -22,6 +25,9 @@ await Task {
 //
 // Read
 //
+// curl --user 'aaa:aaa' http://192.168.50.55:81/dav/t1
+//
+
 await Task {
     let ret = await wd.read("http://192.168.50.55:81/dav/doroTestFile")
     print(String(data: ret!, encoding: .utf8)!)
@@ -30,6 +36,9 @@ await Task {
 //
 // List
 //
+// curl --user 'aaa:aaa' -X PROPFIND -H "Depth: 1" http://192.168.50.55:81/dav/
+//
+
 await Task {
     let ret = await wd.list()
     dump(ret)
@@ -38,6 +47,9 @@ await Task {
 //
 // Delete
 //
+// curl --user 'aaa:aaa' -X DELETE http://192.168.50.55:81/dav/t1
+//
+
 await Task {
     let ret = await wd.delete("http://192.168.50.55:81/dav/doroTestFile")
     dump(ret)
