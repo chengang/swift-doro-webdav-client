@@ -7,7 +7,7 @@ public class DoroWebDAVClient {
     let usr: String
     let passwd: String
     
-    init(baseUrl: String, usr: String, passwd: String) {
+    public init(baseUrl: String, usr: String, passwd: String) {
         self.baseUrl = baseUrl
         self.currentUrl = baseUrl
         self.usr = usr
@@ -117,7 +117,7 @@ public class DoroWebDAVClient {
         }
     }
 
-    func delete(_ urlString: String) async -> Bool {
+    public func delete(_ urlString: String) async -> Bool {
         guard let url = URL(string: urlString) else {
             return false
         }
