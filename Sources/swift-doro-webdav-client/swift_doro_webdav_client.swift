@@ -1,7 +1,7 @@
 import Foundation
 import OSLog
 
-class DoroWebDAVClient {
+public class DoroWebDAVClient {
     let baseUrl: String
     let currentUrl: String
     let usr: String
