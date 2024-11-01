@@ -6,12 +6,28 @@ public class DoroWebDAVClient {
     let currentUrl: String
     let usr: String
     let passwd: String
+    let connectTimeout: Double
+    let totalTimeout: Double
     
-    public init(baseUrl: String, usr: String, passwd: String) {
+    public init(baseUrl: String,
+                usr: String,
+                passwd: String,
+                connectTimeout: Double = 30,
+                totalTimeout: Double = 86400
+    ) {
         self.baseUrl = baseUrl
         self.currentUrl = baseUrl
         self.usr = usr
         self.passwd = passwd
+        self.connectTimeout = connectTimeout
+        self.totalTimeout = totalTimeout
+    }
+
+    private func getURLSession() -> URLSession {
+        let urlSession = URLSession(configuration: .ephemeral)
+        urlSession.configuration.timeoutIntervalForRequest = self.connectTimeout
+        urlSession.configuration.timeoutIntervalForResource = self.totalTimeout
+        return urlSession
     }
     
     private func urlRequestSetAuth(_ request: inout URLRequest) {
@@ -57,7 +73,7 @@ public class DoroWebDAVClient {
 
         do {
             var retFiles: [[String: String]] = []
-            let (xmlData, _) = try await URLSession(configuration: .ephemeral).data(for: request)
+            let (xmlData, _) = try await self.getURLSession().data(for: request)
             let xmlTree = try XMLDocument(data: xmlData)
 
             for node in xmlTree.rootElement()!.children! {
@@ -82,7 +98,7 @@ public class DoroWebDAVClient {
         self.urlRequestSetAuth(&request)
 
         do {
-            let (fileData, response) = try await URLSession(configuration: .ephemeral).data(for: request)
+            let (fileData, response) = try await self.getURLSession().data(for: request)
 
             let httpResponse = response as! HTTPURLResponse
             if httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299 {
@@ -105,7 +121,7 @@ public class DoroWebDAVClient {
         self.urlRequestSetAuth(&request)
 
         do {
-            let (_, response) = try await URLSession(configuration: .ephemeral).upload(for: request, from: data)
+            let (_, response) = try await self.getURLSession().upload(for: request, from: data)
 
             let httpResponse = response as! HTTPURLResponse
             if httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299 {
@@ -127,7 +143,7 @@ public class DoroWebDAVClient {
         self.urlRequestSetAuth(&request)
         
         do {
-            let (_, response) = try await URLSession(configuration: .ephemeral).data(for: request)
+            let (_, response) = try await self.getURLSession().data(for: request)
 
             let httpResponse = response as! HTTPURLResponse
             if httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299 {
