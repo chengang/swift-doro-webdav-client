@@ -24,9 +24,10 @@ public class DoroWebDAVClient {
     }
 
     private func getURLSession() -> URLSession {
-        let urlSession = URLSession(configuration: .ephemeral)
-        urlSession.configuration.timeoutIntervalForRequest = self.connectTimeout
-        urlSession.configuration.timeoutIntervalForResource = self.totalTimeout
+        let conf = URLSessionConfiguration.ephemeral
+        conf.timeoutIntervalForRequest = self.connectTimeout
+        conf.timeoutIntervalForResource = self.totalTimeout
+        let urlSession = URLSession(configuration: conf)
         return urlSession
     }
     
