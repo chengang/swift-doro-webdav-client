@@ -1,4 +1,8 @@
 # swift-doro-webdav-client
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fchengang%2Fswift-doro-webdav-client%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/chengang/swift-doro-webdav-client)
+
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fchengang%2Fswift-doro-webdav-client%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/chengang/swift-doro-webdav-client)
+    
 Lightweight WebDAV client for macOS sans XML library dependencies
 
 ## SYNOPSIS
